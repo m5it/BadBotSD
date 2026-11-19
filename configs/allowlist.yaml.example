@@ -1,0 +1,12 @@
+# BadBotSearch allowlist - services you trust, won't be flagged again
+# Managed via: badbot allowlist list|add|remove and badbot check --interactive
+# Copy to /etc/badbot/allowlist.yaml or keep at configs/allowlist.yaml
+
+services:
+  - /etc/systemd/system/ollama.service
+  # - /etc/systemd/system/my-custom-app.service
+
+# Glob patterns to ignore (optional)
+exclude:
+  # - /etc/systemd/system/custom-*.service
+  # - /etc/systemd/system/dev-*.service

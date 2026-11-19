@@ -1,0 +1,23 @@
+# BadBotSearch IOC Database
+rules:
+  - id: JIATAN-001
+    name: "xz backdoor test blob"
+    description: "Jia Tan xz backdoor - malicious test file blob"
+    severity: critical
+    path_regex: 'bad-3-corrupt_lzma2\.xz|good-large_compressed\.lzma'
+  - id: JIATAN-002
+    name: "xz build-to-host.m4 backdoor"
+    description: "Obfuscated backdoor script in xz build files"
+    severity: critical
+    path_regex: '(^|/)(xz|liblzma).*build-to-host\.m4'
+    contains: 'eval'
+  - id: PERSIST-001
+    name: "Suspicious LD_PRELOAD file"
+    description: "LD_PRELOAD persistence technique"
+    severity: high
+    path_regex: '^/etc/ld\.so\.preload$'
+  - id: SUPPLY-001
+    name: "Suspicious hidden binary in test dir"
+    description: "Binary blob hidden in tests/"
+    severity: high
+    path_regex: 'tests/.*\.xz|tests/.*\.dat'
