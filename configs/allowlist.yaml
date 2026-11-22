@@ -1,0 +1,4 @@
+# BadBotSearch allowlist - services you trust, won't be flagged again
+# Managed via: badbot allowlist list|add|remove and badbot check --interactive
+services: []
+exclude: []

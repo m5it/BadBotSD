@@ -1,0 +1,12 @@
+dest: configs/iocs.yaml
+cache_dir: configs/db
+sources:
+  # Local harddisk DB is preserved: existing JIATAN rules merged with API results
+  # CISA KEV - 1760 actively exploited CVEs. Raw saved to harddisk (1.8M), second run uses 304 cache.
+  # Uncomment to enable: will merge 1760 rules into iocs.yaml (slower scan, use --quick or separate file)
+  # - name: cisa-kev
+  #   type: cisa-kev
+  #   url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+  #   cache_db: configs/db/cisa-kev.json
+  # Harddisk cache already exists from earlier fetch: configs/db/cisa-kev.json (1.8M)
+  # Test manually: badbot update --url https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json --type cisa-kev --dest /tmp/kev_iocs.yaml

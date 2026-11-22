@@ -1,0 +1,42 @@
+# BadBotSearch update config
+# Copy to /etc/badbot/config.yaml or configs/config.yaml
+# All fields support env var expansion: ${VAR}
+
+dest: /etc/badbot/iocs.yaml
+cache_dir: /var/lib/badbot/db  # harddisk DB - raw JSON cached here, second run uses disk if 304/offline
+
+sources:
+  # 1. GitHub source (recommended for public community IOCs)
+  - name: official
+    type: github
+    url: https://raw.githubusercontent.com/badbotsearch/iocs/main/iocs.yaml
+    cache_db: /var/lib/badbot/db/official.yaml
+
+  # 2. CISA KEV - actively exploited CVEs, saved to harddisk then converted to iocs.yaml
+  - name: cisa-kev
+    type: cisa-kev
+    url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+    cache_db: /var/lib/badbot/db/cisa-kev.json
+
+  # 3. NVD - recent CVEs (needs API key for high rate, uncomment to enable)
+  # - name: nvd-recent
+  #   type: nvd
+  #   url: https://services.nvd.nist.gov/rest/json/cves/2.0?resultsPerPage=20
+  #   cache_db: /var/lib/badbot/db/nvd.json
+
+  # 4. Plain HTTPS (no auth) - e.g. your own server
+  # - name: custom
+  #   type: https
+  #   url: https://example.com/iocs.yaml
+
+  # 5. HTTPS with Basic Auth (user+pass)
+  #    You can hardcode here (not recommended) or use env vars:
+  # - name: private
+  #   type: https-auth
+  #   url: https://private.example.com/iocs.yaml
+  #   username: ${BADBOT_USER}
+  #   password: ${BADBOT_PASS}
+
+  # All sources are merged into dest iocs.yaml.
+  # Raw API JSON stays on harddisk in cache_dir - second run uses harddisk if offline/304.
+  # Check: ls /var/lib/badbot/db/  and  cat configs/db/cisa-kev.json | head
